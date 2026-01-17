@@ -1,0 +1,70 @@
+@import "./reset.scss";
+@import "./typography.scss";
+@import "./header.scss";
+@import "./hero.scss";
+@import "./reviews.scss";
+@import "./faq.scss";
+@import "./footer.scss";
+
+:root {
+  --color-primary: #122926;
+  --color-secondary: #ff4d00;
+  --color-grey: #d0d4d4;
+  --color-grey-light: #eceeee;
+  --color-green-light: #1e3431;
+  --color-green: #172d2a;
+  --color-green-50: #889492;
+  --color-white: #ffffff;
+  --color-disabled: #415451;
+}
+
+body {
+  font-family: "THICCCBOI", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.3;
+  color: var(--color-primary);
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+button,
+.button {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-radius: 40px;
+  padding: 16px 28px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: 0.3s ease;
+
+  &:hover {
+    background: var(--color-secondary);
+  }
+
+  &.secondary {
+    background: var(--color-secondary);
+
+    &:hover {
+      background: var(--color-primary);
+    }
+  }
+
+  &.ghost {
+    background: transparent;
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    font-weight: 500;
+
+    &:hover {
+      background: var(--color-primary);
+      color: var(--color-white);
+    }
+  }
+}
