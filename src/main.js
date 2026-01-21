@@ -1,36 +1,9 @@
 import './styles/style.scss';
+import Swiper from 'swiper';
+import 'swiper/css';
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Sub-navigation toggle
-  const triggers = document.querySelectorAll('.js-sub-nav');
-
-  triggers.forEach(trigger => {
-    const category = trigger.dataset.category;
-    const subNav = document.querySelector(`.header__sub-nav[data-sub-nav="${category}"]`);
-
-    if (!subNav) return;
-
-    trigger.addEventListener('click', e => {
-      e.stopPropagation();
-      const isOpen = subNav.classList.contains('is-open');
-      closeAllSubNavs();
-      if (!isOpen) {
-        subNav.classList.add('is-open');
-        trigger.classList.add('is-active');
-      }
-    });
-  });
-
-  document.addEventListener('click', () => {
-    closeAllSubNavs();
-  });
-
-  function closeAllSubNavs() {
-    document.querySelectorAll('.header__sub-nav.is-open').forEach(nav => nav.classList.remove('is-open'));
-    document.querySelectorAll('.js-sub-nav.is-active').forEach(el => el.classList.remove('is-active'));
-  }
-
-  // Mobile menu toggle
+  // --- Mobile menu toggle ---
   const menuBtn = document.getElementById('menuBtn');
   const headerNav = document.getElementById('headerNav');
 
@@ -39,32 +12,88 @@ document.addEventListener('DOMContentLoaded', () => {
       e.stopPropagation();
       headerNav.classList.toggle('is-open');
     });
+  }
 
-    document.addEventListener('click', () => {
-      headerNav.classList.remove('is-open');
+  // --- Swiper ---
+  const sliderEl = document.querySelector('.reviews__swiper');
+  const btnNext = document.querySelector('.reviews__nav-btn--next');
+  const btnPrev = document.querySelector('.reviews__nav-btn--prev');
+
+  if (sliderEl && btnNext && btnPrev) {
+    const swiper = new Swiper(sliderEl, {
+      slidesPerView: 'auto',
+      spaceBetween: 24,
+      speed: 600,
+      watchOverflow: false,
+    });
+
+    btnNext.addEventListener('click', () => swiper.slideNext());
+    btnPrev.addEventListener('click', () => swiper.slidePrev());
+
+    function updateButtons() {
+      btnPrev.classList.toggle('active', !swiper.isBeginning);
+      btnNext.classList.toggle('active', !swiper.isEnd);
+    }
+
+    updateButtons();
+    swiper.on('slideChange', updateButtons);
+    swiper.on('reachBeginning', updateButtons);
+    swiper.on('reachEnd', updateButtons);
+    swiper.on('fromEdge', updateButtons);
+  }
+
+  // --- FAQ accordion ---
+  const questions = document.querySelectorAll('.faq__question');
+
+  function updateOpenAnswersHeight() {
+    document.querySelectorAll('.faq__answer.open').forEach(answer => {
+      if (answer) {
+        answer.style.height = 'auto';
+        const newHeight = answer.scrollHeight;
+        answer.style.height = newHeight + 'px';
+      }
     });
   }
 
-  // FAQ accordion
-  const questions = document.querySelectorAll('.faq__question');
+  if (questions.length > 0) {
+    const firstAnswer = questions[0].nextElementSibling;
+    if (firstAnswer) {
+      firstAnswer.classList.add('open');
+      firstAnswer.style.height = firstAnswer.scrollHeight + 'px';
+      questions[0].classList.add('active');
+    }
+  }
 
   questions.forEach(button => {
     button.addEventListener('click', () => {
       const currentAnswer = button.nextElementSibling;
+      if (!currentAnswer) return;
 
       document.querySelectorAll('.faq__answer.open').forEach(answer => {
         if (answer !== currentAnswer) {
+          answer.style.height = 0;
           answer.classList.remove('open');
-          answer.previousElementSibling.classList.remove('active');
+          if (answer.previousElementSibling) {
+            answer.previousElementSibling.classList.remove('active');
+          }
         }
       });
 
-      currentAnswer.classList.toggle('open');
-      button.classList.toggle('active');
+      if (currentAnswer.classList.contains('open')) {
+        currentAnswer.style.height = 0;
+        currentAnswer.classList.remove('open');
+        button.classList.remove('active');
+      } else {
+        currentAnswer.classList.add('open');
+        button.classList.add('active');
+        currentAnswer.style.height = currentAnswer.scrollHeight + 'px';
+      }
     });
   });
 
-  // Contact popup
+  window.addEventListener('resize', updateOpenAnswersHeight);
+
+  // --- Contact popup ---
   const popupOpenBtn = document.getElementById('contactBtn');
   const popup = document.getElementById('contactPopup');
   const popupCloseBtn = document.getElementById('contactPopupClose');
@@ -85,14 +114,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.addEventListener('click', e => {
     const headerNav = document.querySelector('.header__nav');
-    if (headerNav) {
+    const servicesToggle = document.getElementById('services-toggle');
+    const popup = document.getElementById('contactPopup');
+    const popupOpenBtn = document.getElementById('contactBtn');
+
+    if (headerNav && !e.target.closest('.header__nav') && !e.target.closest('#menuBtn')) {
       headerNav.classList.remove('is-open');
+      if (servicesToggle) servicesToggle.checked = false;
     }
 
-    if (popup && popup.classList.contains('open')) {
-      if (!popup.contains(e.target) && e.target !== popupOpenBtn) {
-        popup.classList.remove('open');
-      }
+    if (popup && popup.classList.contains('open') &&
+      !e.target.closest('#contactPopup') && e.target !== popupOpenBtn) {
+      popup.classList.remove('open');
     }
   });
 
@@ -102,17 +135,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Form validation
+  // --- Form validation ---
   const form = document.getElementById('contactForm');
 
   if (form) {
     function clearErrors() {
       document.querySelectorAll('.error-message').forEach(el => {
-        el.textContent = '';
-        el.style.display = 'none';
+        if (el) {
+          el.textContent = '';
+          el.style.display = 'none';
+        }
       });
       document.querySelectorAll('.footer__popup-input, .footer__popup-checkbox-label').forEach(el => {
-        el.classList.remove('error');
+        if (el) el.classList.remove('error');
       });
     }
 
@@ -144,103 +179,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
       let isValid = true;
 
-      const phone = phoneInput.value.trim();
-      if (!phone) {
-        showError('phoneError', 'Phone is required');
-        phoneInput.classList.add('error');
-        isValid = false;
-      } else if (!isValidUkrainianPhone(phone)) {
-        showError('phoneError', 'Please enter a valid Ukrainian phone number (e.g. +380XXXXXXXXX or 0XXXXXXXXX)');
-        phoneInput.classList.add('error');
-        isValid = false;
+      if (phoneInput) {
+        const phone = phoneInput.value.trim();
+        if (!phone) {
+          showError('phoneError', 'Phone is required');
+          phoneInput.classList.add('error');
+          isValid = false;
+        } else if (!isValidUkrainianPhone(phone)) {
+          showError('phoneError', 'Please enter a valid Ukrainian phone number (e.g. +380XXXXXXXXX or 0XXXXXXXXX)');
+          phoneInput.classList.add('error');
+          isValid = false;
+        }
       }
 
-      const email = emailInput.value.trim();
-      if (!email) {
-        showError('emailError', 'Email is required');
-        emailInput.classList.add('error');
-        isValid = false;
-      } else if (!isValidEmail(email)) {
-        showError('emailError', 'Please enter a valid email');
-        emailInput.classList.add('error');
-        isValid = false;
+      if (emailInput) {
+        const email = emailInput.value.trim();
+        if (!email) {
+          showError('emailError', 'Email is required');
+          emailInput.classList.add('error');
+          isValid = false;
+        } else if (!isValidEmail(email)) {
+          showError('emailError', 'Please enter a valid email');
+          emailInput.classList.add('error');
+          isValid = false;
+        }
       }
 
-      if (!checkbox.checked) {
+      if (checkbox && !checkbox.checked) {
         showError('checkboxError', 'You must agree to the Privacy Policy');
-        document.querySelector('.footer__popup-checkbox-label').classList.add('error');
+        const checkboxLabel = document.querySelector('.footer__popup-checkbox-label');
+        if (checkboxLabel) checkboxLabel.classList.add('error');
         isValid = false;
       }
 
       if (isValid) {
-        if (popup) {
-          popup.classList.remove('open');
-          form.reset();
-          clearErrors();
-        }
+        if (popup) popup.classList.remove('open');
+        form.reset();
+        clearErrors();
         console.log('Form submitted successfully!');
       }
     });
   }
-});
-
-// Slick slider initialization
-import $ from 'jquery';
-window.$ = window.jQuery = $;
-
-import 'slick-carousel';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-
-const $slider = $('.reviews__list');
-const $prevBtn = $('#reviewsPrevBtn');
-const $nextBtn = $('#reviewsNextBtn');
-
-$slider.slick({
-  slidesToShow: 4,
-  slidesToScroll: 1,
-  prevArrow: $prevBtn,
-  nextArrow: $nextBtn,
-  arrows: true,
-  infinite: false,
-  responsive: [
-    {
-      breakpoint: 450,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1,
-      }
-    }
-  ]
-});
-
-function updateArrows(slick) {
-  const currentSlide = slick.currentSlide;
-  const totalSlides = slick.slideCount;
-  const slidesToShow = slick.options.slidesToShow;
-
-  if (currentSlide > 0) {
-    $prevBtn.addClass('active');
-  } else {
-    $prevBtn.removeClass('active');
-  }
-
-  const lastSlideIndex = totalSlides - slidesToShow;
-  if (currentSlide < lastSlideIndex) {
-    $nextBtn.addClass('active');
-  } else {
-    $nextBtn.removeClass('active');
-  }
-}
-
-$slider.on('init', (event, slick) => {
-  updateArrows(slick);
-});
-
-$slider.on('afterChange', (event, slick) => {
-  updateArrows(slick);
-});
-
-$slider.on('breakpoint', (event, slick) => {
-  setTimeout(() => updateArrows(slick), 0);
 });

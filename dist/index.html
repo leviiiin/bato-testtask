@@ -41,18 +41,19 @@
     />
     <meta name="twitter:image" content="/images/hero.jpg" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <script type="module" crossorigin src="/assets/index-BRM5Zon4.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-DpfF9EmG.css">
+    <script type="module" crossorigin src="/assets/index-CUF6HqL0.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BZklcImM.css">
   </head>
   <body>
     <!-- HEADER -->
-    <header class="header" role="banner">
+    <header class="header">
       <div class="container">
         <div class="header__content">
           <img
-            src="/Logo.png"
+            src="/Logo.svg"
             alt="Bato TestTask Logo - Innovative Marketing Agency"
             class="header__logo"
+            loading="lazy"
           />
           <div class="header__flex">
             <nav class="header__nav" aria-label="Navigation" id="headerNav">
@@ -61,11 +62,8 @@
                 <li>
                   <a href="/about.html" class="header__nav-link">About us</a>
                 </li>
-                <li>
-                  <span
-                    class="header__nav-link js-sub-nav"
-                    data-category="services"
-                  >
+                <li class="services-nav">
+                  <span class="header__nav-link">
                     Services
                     <svg
                       width="10"
@@ -81,6 +79,52 @@
                       />
                     </svg>
                   </span>
+                  <div class="header__sub-nav">
+                    <ul class="header__sub-nav-list">
+                      <li>
+                        <a
+                          href="/services/strategy-and-analytics.html"
+                          class="header__sub-nav-link"
+                          >Strategy & Analytics</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="/services/advertising-on-the-internet.html"
+                          class="header__sub-nav-link"
+                          >Advertising on the Internet</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="/services/content-marketing.html"
+                          class="header__sub-nav-link"
+                          >Content Marketing</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="/services/email-marketing.html"
+                          class="header__sub-nav-link"
+                          >Email marketing</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="/services/social-media-management.html"
+                          class="header__sub-nav-link"
+                          >Social Media Management</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="/services/seo.html"
+                          class="header__sub-nav-link"
+                          >SEO</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
                 </li>
                 <li>
                   <a href="/cases.html" class="header__nav-link">Cases</a>
@@ -98,9 +142,9 @@
                   <a href="/contact.html" class="header__nav-link"> Contact </a>
                 </li>
                 <li class="hidden-on-desktop">
-                  <button class="button header__nav-link">
+                  <a class="button header__nav-link" href="">
                     Leave a request
-                  </button>
+                  </a>
                 </li>
                 <li class="hidden-on-desktop">
                   <div class="header__socials">
@@ -166,54 +210,10 @@
                   </div>
                 </li>
               </ul>
-              <nav class="header__sub-nav" data-sub-nav="services">
-                <ul class="header__sub-nav-list">
-                  <li>
-                    <a
-                      href="/services/strategy-and-analytics.html"
-                      class="header__sub-nav-link"
-                      >Strategy & Analytics</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="/services/advertising-on-the-internet.html"
-                      class="header__sub-nav-link"
-                      >Advertising on the Internet</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="/services/content-marketing.html"
-                      class="header__sub-nav-link"
-                      >Content Marketing</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="/services/email-marketing.html"
-                      class="header__sub-nav-link"
-                      >Email marketing</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="/services/social-media-management.html"
-                      class="header__sub-nav-link"
-                      >Social Media Management</a
-                    >
-                  </li>
-                  <li>
-                    <a href="/services/seo.html" class="header__sub-nav-link"
-                      >SEO</a
-                    >
-                  </li>
-                </ul>
-              </nav>
             </nav>
             <div class="header__lang-btn">EN</div>
-            <button class="header__btn">Leave a request</button>
-            <button class="header__menu-btn" id="menuBtn">
+            <a class="button header__btn" href="">Leave a request</a>
+            <button class="header__menu-btn" id="menuBtn" aria-label="Open menu button">
               <svg
                 class="header__menu-btn-icon"
                 width="20"
@@ -245,13 +245,18 @@
                 unique and effective marketing solutions for businesses of all
                 sizes.
               </p>
-              <button class="secondary hero__btn">Free consultation</button>
+              <a class="button secondary hero__btn" href=""
+                >Free consultation</a
+              >
             </div>
-            <img
-              class="hero__img"
-              src="/images/hero.jpg"
-              alt="Innovative marketing agency team creating unique solutions for business growth"
-            />
+            <div class="hero__image">
+              <img
+                class="hero__image-img"
+                src="/images/hero.jpg"
+                alt="Innovative marketing agency team creating unique solutions for business growth"
+                loading="lazy"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -265,6 +270,8 @@
                 <button
                   class="reviews__nav-btn reviews__nav-btn--prev"
                   id="reviewsPrevBtn"
+                  aria-label="Previous customer review"
+                  title="Previous review"
                 >
                   <svg
                     class="reviews__nav-icon"
@@ -283,6 +290,8 @@
                 <button
                   class="reviews__nav-btn reviews__nav-btn--next active"
                   id="reviewsNextBtn"
+                  aria-label="Next customer review"
+                  title="Next review"
                 >
                   <svg
                     class="reviews__nav-icon"
@@ -300,17 +309,18 @@
                 </button>
               </div>
             </div>
-            <div class="reviews__slider-wrap">
-              <div class="reviews__list">
-                <div class="reviews__card">
+            <div class="swiper reviews__swiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide reviews__card">
                   <div class="reviews__author">
                     <img
                       class="reviews__author-img"
                       src="/images/review1.png"
                       alt="Carl Gregory, Co-founder of Digital Impact"
+                      loading="lazy"
                     />
                     <div class="reviews__author-info">
-                      <h4 class="reviews__author-name">Carl Gregory</h4>
+                      <p class="reviews__author-name">Carl Gregory</p>
                       <p class="reviews__author-position">
                         Co-founder of Digital Impact
                       </p>
@@ -320,6 +330,7 @@
                     class="reviews__author-quotes"
                     src="/icons/quotes.png"
                     alt="Quote icon for customer testimonial"
+                    loading="lazy"
                   />
                   <p class="reviews__authot-text">
                     The marketing agency turned out to be an ideal partner for
@@ -328,15 +339,16 @@
                     very grateful for their work.
                   </p>
                 </div>
-                <div class="reviews__card">
+                <div class="swiper-slide reviews__card">
                   <div class="reviews__author">
                     <img
                       class="reviews__author-img"
                       src="/images/review2.png"
                       alt="Talia Williams, Creative Forum Marketing Director"
+                      loading="lazy"
                     />
                     <div class="reviews__author-info">
-                      <h4 class="reviews__author-name">Talia Williams</h4>
+                      <p class="reviews__author-name">Talia Williams</p>
                       <p class="reviews__author-position">
                         Creative Forum Marketing Director
                       </p>
@@ -346,6 +358,7 @@
                     class="reviews__author-quotes"
                     src="/icons/quotes.png"
                     alt="Quote icon for customer testimonial"
+                    loading="lazy"
                   />
                   <p class="reviews__authot-text">
                     Very satisfied with the work of the agency! They've done a
@@ -353,15 +366,16 @@
                     attract new customers. I recommend them to everyone!
                   </p>
                 </div>
-                <div class="reviews__card">
+                <div class="swiper-slide reviews__card">
                   <div class="reviews__author">
                     <img
                       class="reviews__author-img"
                       src="/images/review3.png"
                       alt="Gregory Shelton, CEO at Global Soft Solutions"
+                      loading="lazy"
                     />
                     <div class="reviews__author-info">
-                      <h4 class="reviews__author-name">Gregory Shelton</h4>
+                      <p class="reviews__author-name">Gregory Shelton</p>
                       <p class="reviews__author-position">
                         CEO at Global Soft Solutions
                       </p>
@@ -371,6 +385,7 @@
                     class="reviews__author-quotes"
                     src="/icons/quotes.png"
                     alt="Quote icon for customer testimonial"
+                    loading="lazy"
                   />
                   <p class="reviews__authot-text">
                     We've been working with Digital Boost for the past two years
@@ -380,15 +395,16 @@
                     for efficiency and professionalism!
                   </p>
                 </div>
-                <div class="reviews__card">
+                <div class="swiper-slide reviews__card">
                   <div class="reviews__author">
                     <img
                       class="reviews__author-img"
                       src="/images/review4.png"
                       alt="Cohen Mason, SEO in Invision Studio"
+                      loading="lazy"
                     />
                     <div class="reviews__author-info">
-                      <h4 class="reviews__author-name">Cohen Mason</h4>
+                      <p class="reviews__author-name">Cohen Mason</p>
                       <p class="reviews__author-position">
                         SEO in Invision Studio
                       </p>
@@ -398,6 +414,7 @@
                     class="reviews__author-quotes"
                     src="/icons/quotes.png"
                     alt="Quote icon for customer testimonial"
+                    loading="lazy"
                   />
                   <p class="reviews__authot-text">
                     Thanks to the strategic approach and professional approach
@@ -406,15 +423,16 @@
                     campaigns.
                   </p>
                 </div>
-                <div class="reviews__card">
+                <div class="swiper-slide reviews__card">
                   <div class="reviews__author">
                     <img
                       class="reviews__author-img"
                       src="/images/review1.png"
                       alt="Carl Gregory, Co-founder of Digital Impact"
+                      loading="lazy"
                     />
                     <div class="reviews__author-info">
-                      <h4 class="reviews__author-name">Carl Gregory</h4>
+                      <p class="reviews__author-name">Carl Gregory</p>
                       <p class="reviews__author-position">
                         Co-founder of Digital Impact
                       </p>
@@ -424,6 +442,7 @@
                     class="reviews__author-quotes"
                     src="/icons/quotes.png"
                     alt="Quote icon for customer testimonial"
+                    loading="lazy"
                   />
                   <p class="reviews__authot-text">
                     The marketing agency turned out to be an ideal partner for
@@ -432,15 +451,16 @@
                     very grateful for their work.
                   </p>
                 </div>
-                <div class="reviews__card">
+                <div class="swiper-slide reviews__card">
                   <div class="reviews__author">
                     <img
                       class="reviews__author-img"
                       src="/images/review2.png"
                       alt="Talia Williams, Creative Forum Marketing Director"
+                      loading="lazy"
                     />
                     <div class="reviews__author-info">
-                      <h4 class="reviews__author-name">Talia Williams</h4>
+                      <p class="reviews__author-name">Talia Williams</p>
                       <p class="reviews__author-position">
                         Creative Forum Marketing Director
                       </p>
@@ -450,6 +470,7 @@
                     class="reviews__author-quotes"
                     src="/icons/quotes.png"
                     alt="Quote icon for customer testimonial"
+                    loading="lazy"
                   />
                   <p class="reviews__authot-text">
                     Very satisfied with the work of the agency! They've done a
@@ -457,15 +478,16 @@
                     attract new customers. I recommend them to everyone!
                   </p>
                 </div>
-                <div class="reviews__card">
+                <div class="swiper-slide reviews__card">
                   <div class="reviews__author">
                     <img
                       class="reviews__author-img"
                       src="/images/review3.png"
                       alt="Gregory Shelton, CEO at Global Soft Solutions"
+                      loading="lazy"
                     />
                     <div class="reviews__author-info">
-                      <h4 class="reviews__author-name">Gregory Shelton</h4>
+                      <p class="reviews__author-name">Gregory Shelton</p>
                       <p class="reviews__author-position">
                         CEO at Global Soft Solutions
                       </p>
@@ -475,6 +497,7 @@
                     class="reviews__author-quotes"
                     src="/icons/quotes.png"
                     alt="Quote icon for customer testimonial"
+                    loading="lazy"
                   />
                   <p class="reviews__authot-text">
                     We've been working with Digital Boost for the past two years
@@ -484,15 +507,16 @@
                     for efficiency and professionalism!
                   </p>
                 </div>
-                <div class="reviews__card">
+                <div class="swiper-slide reviews__card">
                   <div class="reviews__author">
                     <img
                       class="reviews__author-img"
                       src="/images/review4.png"
                       alt="Cohen Mason, SEO in Invision Studio"
+                      loading="lazy"
                     />
                     <div class="reviews__author-info">
-                      <h4 class="reviews__author-name">Cohen Mason</h4>
+                      <p class="reviews__author-name">Cohen Mason</p>
                       <p class="reviews__author-position">
                         SEO in Invision Studio
                       </p>
@@ -502,6 +526,7 @@
                     class="reviews__author-quotes"
                     src="/icons/quotes.png"
                     alt="Quote icon for customer testimonial"
+                    loading="lazy"
                   />
                   <p class="reviews__authot-text">
                     Thanks to the strategic approach and professional approach
@@ -522,31 +547,12 @@
             <h2 class="faq__title">FAQs</h2>
             <div class="faq__list">
               <div class="faq__item">
-                <button class="faq__question active">
-                  <h4 class="faq__question-title">
+                <div class="faq__question active">
+                  <h3 class="faq__question-title">
                     Can your agency work with companies of different sizes?
-                  </h4>
-                  <span class="faq__question-icon">
-                    <svg
-                      width="11"
-                      height="11"
-                      viewBox="0 0 11 11"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M10.5 5.5L0.5 5.5"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                      />
-                      <path
-                        d="M5.5 10.5L5.5 0.5"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                      />
-                    </svg>
-                  </span>
-                </button>
+                  </h3>
+                  <span class="faq__question-icon"> </span>
+                </div>
                 <div class="faq__answer open">
                   <p>
                     Our agency is ready to provide an individual approach to
@@ -560,31 +566,12 @@
                 </div>
               </div>
               <div class="faq__item">
-                <button class="faq__question">
-                  <h4 class="faq__question-title">
+                <div class="faq__question">
+                  <h3 class="faq__question-title">
                     Do you provide individual consultations?
-                  </h4>
-                  <span class="faq__question-icon">
-                    <svg
-                      width="11"
-                      height="11"
-                      viewBox="0 0 11 11"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M10.5 5.5L0.5 5.5"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                      />
-                      <path
-                        d="M5.5 10.5L5.5 0.5"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                      />
-                    </svg>
-                  </span>
-                </button>
+                  </h3>
+                  <span class="faq__question-icon"> </span>
+                </div>
                 <div class="faq__answer">
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -600,32 +587,13 @@
                 </div>
               </div>
               <div class="faq__item">
-                <button class="faq__question">
-                  <h4 class="faq__question-title">
+                <div class="faq__question">
+                  <h3 class="faq__question-title">
                     What results can be expected from cooperation with your
                     agency?
-                  </h4>
-                  <span class="faq__question-icon">
-                    <svg
-                      width="11"
-                      height="11"
-                      viewBox="0 0 11 11"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M10.5 5.5L0.5 5.5"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                      />
-                      <path
-                        d="M5.5 10.5L5.5 0.5"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                      />
-                    </svg>
-                  </span>
-                </button>
+                  </h3>
+                  <span class="faq__question-icon"> </span>
+                </div>
                 <div class="faq__answer">
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -641,31 +609,12 @@
                 </div>
               </div>
               <div class="faq__item">
-                <button class="faq__question">
-                  <h4 class="faq__question-title">
+                <div class="faq__question">
+                  <h3 class="faq__question-title">
                     How do you define a marketing strategy for each client?
-                  </h4>
-                  <span class="faq__question-icon">
-                    <svg
-                      width="11"
-                      height="11"
-                      viewBox="0 0 11 11"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M10.5 5.5L0.5 5.5"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                      />
-                      <path
-                        d="M5.5 10.5L5.5 0.5"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                      />
-                    </svg>
-                  </span>
-                </button>
+                  </h3>
+                  <span class="faq__question-icon"> </span>
+                </div>
                 <div class="faq__answer">
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -681,31 +630,12 @@
                 </div>
               </div>
               <div class="faq__item">
-                <button class="faq__question">
-                  <h4 class="faq__question-title">
+                <div class="faq__question">
+                  <span class="faq__question-title">
                     What types of platforms do you use to advertise online?
-                  </h4>
-                  <span class="faq__question-icon">
-                    <svg
-                      width="11"
-                      height="11"
-                      viewBox="0 0 11 11"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M10.5 5.5L0.5 5.5"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                      />
-                      <path
-                        d="M5.5 10.5L5.5 0.5"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                      />
-                    </svg>
                   </span>
-                </button>
+                  <span class="faq__question-icon"> </span>
+                </div>
                 <div class="faq__answer">
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -740,7 +670,7 @@
             Contact us today and find out how our marketing agency can help you
             achieve your goal. Get started with us now!
           </p>
-          <button class="secondary footer__btn" id="contactBtn">
+          <button class="secondary footer__btn" id="contactBtn" aria-label="Contact us button">
             Contact us
           </button>
         </div>
@@ -798,7 +728,12 @@
                   class="footer__popup-checkbox"
                 />
                 <span class="checkmark"></span>
-                I agree with the Privacy Policy
+                I agree with the
+                <a
+                  class="footer__popup-checkbox-link"
+                  href="/privacy-police.html"
+                  >Privacy Policy</a
+                >
               </label>
               <span class="error-message" id="checkboxError"></span>
             </div>
