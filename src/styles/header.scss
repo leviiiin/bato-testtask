@@ -60,7 +60,48 @@
       & > .services-nav {
         position: relative;
 
-        &:hover > .header__sub-nav {
+        & .header__nav-link {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+
+          @media (max-width: 1024px) {
+            color: var(--color-primary);
+
+            &:hover {
+              color: var(--color-primary);
+            }
+          }
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+          &:hover > .header__sub-nav {
+            opacity: 1;
+            visibility: visible;
+            -webkit-transform: translateX(-50%) translateY(0);
+            -ms-transform: translateX(-50%) translateY(0);
+            transform: translateX(-50%) translateY(0);
+          }
+
+          &:hover .header__nav-link {
+            color: #ff5a30;
+          }
+
+          &:hover .header__nav-link-chevron {
+            -webkit-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            transform: rotate(180deg);
+            -webkit-transition: -webkit-transform 0.25s;
+            transition: -webkit-transform 0.25s;
+            -o-transition: transform 0.25s;
+            transition: transform 0.25s;
+            transition:
+              transform 0.25s,
+              -webkit-transform 0.25s;
+          }
+        }
+
+        &.is-open > .header__sub-nav {
           opacity: 1;
           visibility: visible;
           -webkit-transform: translateX(-50%) translateY(0);
@@ -68,34 +109,17 @@
           transform: translateX(-50%) translateY(0);
         }
 
-        & .header__nav-link {
-          display: -webkit-box;
-          display: -ms-flexbox;
-          display: flex;
-        }
-
-        &:hover .header__nav-link {
-          color: #ff5a30;
-        }
-
-        @media (max-width: 1024px) {
-          &:hover .header__nav-link {
+        &.is-open .header__nav-link {
+          @media (max-width: 1024px) {
             background-color: var(--color-primary);
             color: var(--color-white);
           }
         }
 
-        &:hover .header__nav-link-chevron {
+        &.is-open .header__nav-link-chevron {
           -webkit-transform: rotate(180deg);
           -ms-transform: rotate(180deg);
           transform: rotate(180deg);
-          -webkit-transition: -webkit-transform 0.25s;
-          transition: -webkit-transform 0.25s;
-          -o-transition: transform 0.25s;
-          transition: transform 0.25s;
-          transition:
-            transform 0.25s,
-            -webkit-transform 0.25s;
         }
       }
     }

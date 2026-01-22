@@ -90,16 +90,28 @@
       transition: 0.3s ease;
       position: relative;
 
+      &::before,
       &::after {
+        content: "";
         position: absolute;
         top: 50%;
         left: 50%;
+        width: 10px;
+        height: 1px;
+        background: currentColor;
+        border-radius: 10px;
+      }
+
+      &::before {
         -webkit-transform: translate(-50%, -50%);
         -ms-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
-        content: "+";
-        font-size: 28px;
-        font-weight: 400;
+      }
+
+      &::after {
+        -webkit-transform: translate(-50%, -50%) rotate(90deg);
+        -ms-transform: translate(-50%, -50%) rotate(90deg);
+        transform: translate(-50%, -50%) rotate(90deg);
       }
     }
   }

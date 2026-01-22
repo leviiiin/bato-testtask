@@ -14,6 +14,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // --- Mobile services toggle ---
+  const isTouch =
+    window.matchMedia('(hover: none)').matches ||
+    'ontouchstart' in window;
+
+  if (!isTouch) return;
+
+  const serviceItem = document.querySelector('.services-nav');
+  const trigger = serviceItem?.querySelector('.header__nav-link');
+
+  if (!serviceItem || !trigger) return;
+
+  trigger.addEventListener('click', e => {
+    e.preventDefault();
+    e.stopPropagation();
+    serviceItem.classList.toggle('is-open');
+  });
+
+  document.addEventListener('click', e => {
+    if (!serviceItem.contains(e.target)) {
+      serviceItem.classList.remove('is-open');
+    }
+  });
+
   // --- Swiper ---
   const sliderEl = document.querySelector('.reviews__swiper');
   const btnNext = document.querySelector('.reviews__nav-btn--next');

@@ -36,6 +36,10 @@
     }
   }
 
+  &__btn {
+    display: inline-block;
+  }
+
   @media (max-width: 1024px) {
     &__img {
       max-width: 450px;
